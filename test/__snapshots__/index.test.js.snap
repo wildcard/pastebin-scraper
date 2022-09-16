@@ -1,0 +1,26 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Parsing Lite Table 1`] = `
+[
+  {
+    "id": "6ryvL9V2",
+    "link": "/6ryvL9V2",
+    "syntax": "TypeScript",
+  },
+  {
+    "id": "jWHZjpCC",
+    "link": "/jWHZjpCC",
+    "syntax": "TypeScript",
+  },
+  {
+    "id": "Lg2LV0a0",
+    "link": "/Lg2LV0a0",
+    "syntax": "TypeScript",
+  },
+  {
+    "id": "pJEPaduj",
+    "link": "/pJEPaduj",
+    "syntax": "TypeScript",
+  },
+]
+`;
