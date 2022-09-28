@@ -336,7 +336,7 @@ const { parseIndexPage, parseItem } = require('../index')
 
 describe("Parsing Lite", () => {
     test("Table", () => {
-        const items = parseIndexPage(null, htmlTableLiteDump)
+        const items = parseIndexPage(htmlTableLiteDump)
 
         expect(items.length).toEqual(4)
         expect(items.map(i=>(i.link))).toEqual(['/6ryvL9V2', '/jWHZjpCC', '/Lg2LV0a0', '/pJEPaduj'])

@@ -41,6 +41,7 @@ function parseItem($, $tr) {
 }
 
 function parseIndexPage(html) {
+    console.log(`Parsing page: ${html}`)
     const $ = cheerio.load(html)
     const $tableRows = $('.archive-table .maintable tr');
     const items = [];
@@ -77,10 +78,13 @@ async function scrapeIndexPage() {
     const ts = Date.now();
     
     await dumpIndexPage(ts, res.data);    
-    const items = parseIndexPage(ts, res.data);
-    
+    const items = parseIndexPage(res.data);
+   
+    console.log(items)
+
     await Promise.all(items.map(async (item) => {
         const { link } = item;
+        console.log(`Scrapping page: ${link}`)
         const snippetData = await scrapeSnippetPage(ts, link, item);
         
         db.push({
