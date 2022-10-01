@@ -4,23 +4,38 @@ exports[`Parsing Lite Table 1`] = `
 [
   {
     "id": "6ryvL9V2",
-    "link": "/6ryvL9V2",
     "syntax": "TypeScript",
+    "title": "AuthGuard",
   },
   {
     "id": "jWHZjpCC",
-    "link": "/jWHZjpCC",
-    "syntax": "TypeScript",
+    "syntax": "Rust",
+    "title": "grid paths",
   },
   {
     "id": "Lg2LV0a0",
-    "link": "/Lg2LV0a0",
-    "syntax": "TypeScript",
+    "syntax": "Bash",
+    "title": "fdsafsd",
   },
   {
     "id": "pJEPaduj",
-    "link": "/pJEPaduj",
+    "syntax": "Python",
+    "title": "Untitled",
+  },
+]
+`;
+
+exports[`Parsing Lite Table with limit=2 1`] = `
+[
+  {
+    "id": "6ryvL9V2",
     "syntax": "TypeScript",
+    "title": "AuthGuard",
+  },
+  {
+    "id": "jWHZjpCC",
+    "syntax": "Rust",
+    "title": "grid paths",
   },
 ]
 `;

@@ -8,9 +8,10 @@
 | 16:44-18:00 | parsing tests                          |
 | 18:00-18:30 | Dumping snippt page                    |
 | 19:00-19:30 | prototyping Dumping snippet page       |
-|             | tests                                  |
 | 23:00-23:30 | Getting the exercise + setting this md |
-| 23:30-    | Continue scrapping item page |
+| 23:30-00:00 | Continue scrapping item page           |
+| 14:00-14:30 | Continue scrapping item page           |
+| 15:00-16:30 | Parsing snippet page |
 
 ## How to run?
 
@@ -89,6 +90,6 @@ We strongly recommend using the following libraries:
 - axios (http client)
 - cheerio (html parsing)
 - MongoDB (storage)
-- ~~moment.js~~ day.js (dates)
+- ~~moment.js~~ date-fns (dates)
 
 Best of luck! :)
