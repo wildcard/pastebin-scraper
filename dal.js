@@ -1,17 +1,17 @@
 global.sessions = [];
 global.db = [];
 
-const { readSessions } = require("./dump");
+const { readSessions, readDb } = require("./dump");
 const { logger } = require('./logger')
 
 async function updateDb(items) {
   let counter = 0;  
   try {
-    global.db = JSON.parse(await fs.readFile("./dump/db.json"));
+    global.db = JSON.parse(await readDb());
   } catch (error) {
     logger.info("No `db.json` file, probably first run on machine 🍺");
   }
-  const set = new Set(db.map((i) => i.id));
+  const set = new Set(global.db.map((i) => i.id));
   items.forEach((i) => {
     if (!set.has(i)) {
         global.db.push(i);
@@ -26,6 +26,10 @@ async function loadSessions() {
   global.sessions = await readSessions();
 }
 
+function addSession(ts) {
+    global.sessions.unshift(ts);
+}
+
 function getSessions() {
     return global.sessions;
 }
@@ -38,5 +42,6 @@ module.exports = {
   updateDb,
   loadSessions,
   getSessions,
+  addSession,
   addItem
 };
