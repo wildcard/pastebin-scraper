@@ -4,12 +4,14 @@ const { logger } = require("./logger");
 
 async function dumpDb() {
   logger.info("Save DB to disk");
-  await fs.writeFile("./dump/db.json", JSON.stringify(db, null, 2));
+  await fs.writeFile("./dump/db.json", JSON.stringify(global.db, null, 2));
 }
-
+async function readDb() {
+  return await fs.readFile("./dump/db.json");
+}
 async function dumpSessions() {
   logger.info("Save sessions to disk");
-  await fs.writeFile("./dump/sessions.json", JSON.stringify(sessions, null, 2));
+  await fs.writeFile("./dump/sessions.json", JSON.stringify(global.sessions, null, 2));
 }
 
 async function readSessions() {
@@ -46,6 +48,7 @@ async function dumpSnippetText(ts, id, txt) {
 
 module.exports = {
   dumpDb,
+  readDb,
   dumpSessions,
   readSessions,
   dumpIndexPage,

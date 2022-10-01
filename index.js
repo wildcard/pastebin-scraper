@@ -3,7 +3,7 @@ const {
   buildRawSnippetPageUrl,
   buildSnippetPageUrl,
 } = require("./const");
-const { updateDb, loadSessions, addItem } = require("./dal");
+const { updateDb, loadSessions, addItem, addSession } = require("./dal");
 const { loadOrFetchPageInSession } = require("./http");
 const {
   dumpSessions,
@@ -34,7 +34,6 @@ async function scrapeSnippetPage(ts, id) {
 }
 
 async function scrapeIndexPage(limit = 50) {
-  let sessionsStatus = null;
   let diskSession = null;
   await loadSessions();
 
@@ -71,14 +70,17 @@ async function scrapeIndexPage(limit = 50) {
       const fullItemData = {
         ...item,
         ...snippetData,
-        status,
+        metadata: {
+            session: ts,
+            status,
+        }
       };
       logger.info("👏 Item data after scrapping snippet page", fullItemData);
       await addItem(id, fullItemData);
     })
   );
 
-  sessions.unshift(ts);
+  addSession(ts);
   await dumpSessions();
   await dumpDb();
 }

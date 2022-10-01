@@ -62,18 +62,18 @@ Following are the bonus parts for this exercise:
 Each one of the paste model's parameters must be normalized.
 For example:
     
-    * Author - In cases it's Guest, Unknown, Anonymous, etc... the author name must be the same, for example: "" (empty string)
-    * Title - Same Behaviour as with Author.
-    * Date - UTC Date
-    * Content - Must be stripped of trailing spaces.
+  * Author - In cases it's *Guest, Unknown, Anonymous, etc...* the author name must be the same, for example: "" (empty string)
+  * Title - Same Behaviour as with *Author*.
+  * Date - UTC Date
+  * Content - Must be stripped of trailing spaces.
 
 ### Bonus #2
 
-Store each one of the pastes in an organized database. It could be done with anything from a local SQLite database to a MongoDB docker container.
+Store each one of the pastes in an organized database. It could be done with anything from a local **SQLite** database to a MongoDB docker container.
 
 ### Bonus #3
 
-Ship your crawler in a Docker image. This will allow it to run on any platform and any computer without any necessary installations. docker-compose and docker swarm solutions are also welcome.
+Ship your crawler in a **Docker image**. This will allow it to run on any platform and any computer without any necessary installations. docker-compose and docker swarm solutions are also welcome.
 See https://www.docker.com/ for more details.
 
 ## General Notes (Apply with or without the bonus parts)

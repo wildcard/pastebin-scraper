@@ -2,7 +2,7 @@ const axios = require("axios");
 const rateLimit = require("axios-rate-limit");
 const Agent = require("agentkeepalive");
 require("axios-debug-log/enable");
-const { PASTEBIN_BASE_URL, PASTEBIN_URL } = require("./const");
+const { PASTEBIN_URL } = require("./const");
 const { getSessions } = require("./dal");
 const { readIndexPageSession, readSnippetPage } = require("./dump");
 const { logger } = require("./logger");
