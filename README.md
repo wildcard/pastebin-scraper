@@ -11,7 +11,8 @@
 | 23:00-23:30 | Getting the exercise + setting this md |
 | 23:30-00:00 | Continue scrapping item page           |
 | 14:00-14:30 | Continue scrapping item page           |
-| 15:00-16:30 | Parsing snippet page |
+| 15:00-16:30 | Parsing snippet page                   |
+| 20:00-22:00 | refractor + loggs + working draft      |
 
 ## How to run?
 
