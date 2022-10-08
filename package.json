@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "pm2 start scrape.js",
+    "start": "pm2 start cmd/scrape.mjs --cron-restart=\"*/2 * * * *\"",
+    "runtime": "pm2-runtime cmd/scrape.mjs --cron-restart=\"*/2 * * * *\"",
     "test": "jest --coverage",
     "lint": "eslint .",
     "clean:db": "truncate -s 0 ./dump/db.json"
@@ -23,7 +24,8 @@
     "date-fns": "^2.29.3",
     "meow": "^10.1.5",
     "pino": "^8.6.1",
-    "sqlite3": "^5.1.1"
+    "sequelize": "^6.24.0",
+    "sqlite3": "^5.1.2"
   },
   "devDependencies": {
     "axios-vcr": "^1.0.2",

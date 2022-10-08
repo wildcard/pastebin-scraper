@@ -30,7 +30,10 @@ Run the following commands (top to bottom)
 
 ### Docker
 
-`docker run pastebin-scrapper`
+```sh
+docker build ./ --tag pastebin-scrapper
+docker run pastebin-scrapper
+```
 
 # Exercise
 
