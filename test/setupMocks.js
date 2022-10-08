@@ -1,6 +1,6 @@
-jest.mock('../dump')
-jest.mock('../dal')
+jest.mock('../lib/dump')
+jest.mock('../lib/dal')
 
-const { getSessions } = require('../dal')
+const { getSessions } = require('../lib/dal')
 
 getSessions.mockReturnValue([]);

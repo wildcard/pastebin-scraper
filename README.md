@@ -13,6 +13,7 @@
 | 14:00-14:30 | Continue scrapping item page           |
 | 15:00-16:30 | Parsing snippet page                   |
 | 20:00-22:00 | refractor + loggs + working draft      |
+| 17:00-20:00 | dir reorg + cli + pm2                  |
 
 ## How to run?
 

@@ -1,12 +1,14 @@
 const cheerio = require("cheerio");
-
+const { buildSnippetPath } = require('../lib/const')
 const { 
     parseSnippetPage,
     parseIndexPage,
     parseItem,
  } = require('../lib/parse')
-const { htmlTableLiteDump, htmlSnippetPageDump } = require("./mocks");
+const { htmlTableLiteDump, htmlSnippetPageDump, htmlSnippetGuestPageDump } = require("./mocks");
 
+const ts = "0000";
+const id = "XXX";
 
 describe("Parsing Lite", () => {
   test("Table", () => {
@@ -40,18 +42,30 @@ describe("Parsing Lite", () => {
   });
 
   test("Snippet page", () => {
-    const ts = "0000";
-    const id = "XXX";
+    
     const { title, author, date, filePath } = parseSnippetPage(
       htmlSnippetPageDump,
       { ts, id }
     );
 
     console.log(title, author, date, filePath)
-    expect(title).toEqual("Untitled");
+    expect(title).toEqual("");
     expect(author).toEqual("AntonGorokhov");
     expect(date).toEqual("2022-10-01T00:00:00+03:00")
-    expect(filePath).toEqual("./dump/sessions/0000/XXX.dump.txt")
+    expect(filePath).toEqual(buildSnippetPath(ts,id))
   });
+
+  
 });
 
+describe("Normalize Rules", () => {
+  test("Author", ()=>{
+    const { author } = parseSnippetPage(htmlSnippetGuestPageDump,{ ts, id });
+    expect(author).toEqual("");
+  })
+
+  test("Title", ()=>{
+    const { title } = parseSnippetPage(htmlSnippetGuestPageDump,{ ts, id });
+    expect(title).toEqual("");
+  })
+})
