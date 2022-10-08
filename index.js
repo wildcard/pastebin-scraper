@@ -3,48 +3,73 @@ const {
   buildRawSnippetPageUrl,
   buildSnippetPageUrl,
 } = require("./const");
-const { updateDb, loadSessions, addItem, addSession } = require("./dal");
-const { loadOrFetchPageInSession } = require("./http");
+const { LoadDb, loadSessions, addItem, addSession, getSessions } = require("./dal");
+const { http } = require("./http");
 const {
   dumpSessions,
   dumpSnippetPage,
   dumpSnippetText,
   dumpIndexPage,
   dumpDb,
+  readIndexPageSession
 } = require("./dump");
 const { parseIndexPage, parseSnippetPage } = require("./parse");
 const { logger } = require("./logger");
+const formatDistanceToNow = require("date-fns/formatDistanceToNow");
+const differenceInMinutes = require("date-fns/differenceInMinutes");
+const formatDistance = require("date-fns/formatDistance");
 
 async function scrapeSnippetPage(ts, id) {
-  let diskSession = null,
-    res,
-    resRaw;
-  [res, diskSession] = await loadOrFetchPageInSession(buildSnippetPageUrl(id));
-  if (!diskSession) {
-    await dumpSnippetPage(ts, id, res.data);
-  }
+  const res = await http(buildSnippetPageUrl(id), { id });
+  await dumpSnippetPage(ts, id, res.data);
 
-  [resRaw, diskSession] = await loadOrFetchPageInSession(
-    buildRawSnippetPageUrl(id), { id }
-  );
-  if (!diskSession) {
-    await dumpSnippetText(ts, id, resRaw.data.toString());
-  }
+  const resRaw = await http(buildRawSnippetPageUrl(id), { id });
+  await dumpSnippetText(ts, id, resRaw.data.toString());
+
   return parseSnippetPage(res.data, { ts, id });
 }
 
+/**
+ * Check if last session occured in the last 2 min
+ * if true, get last session & continue
+ * else start a new session
+ */
+function getSession(thresholdMinutes = 2) {
+  const sessions = getSessions();
+  const now = Date.now();
+  if (sessions.length > 0) {
+    const lastSessionTS = sessions[0];
+    logger.info(`Last Session was: ${formatDistanceToNow(lastSessionTS)}`);
+    if (differenceInMinutes(now, lastSessionTS) <= thresholdMinutes) {
+      logger.info(
+        `Should retrive files from disk, last session was ${formatDistance(
+          now,
+          lastSessionTS
+        )}`
+      );
+      return [lastSessionTS, true];
+    }
+  }
+
+  return [Date.now(), false];
+}
+
 async function scrapeIndexPage(limit = 50) {
-  let diskSession = null;
   await loadSessions();
+  const [ts, diskSession] = getSession();
 
   let res = null;
   try {
-    [res, diskSession] = await loadOrFetchPageInSession(PASTEBIN_URL);
+    if (diskSession) {
+      res = { data: await readIndexPageSession(lastSessionTS) };
+    } else {
+      res = await http.get(PASTEBIN_URL);
+    }
   } catch (error) {
     logger.error(error);
     return;
   }
-  const ts = Date.now();
+
   logger.info(`🏁 Session ${ts} start`);
 
   if (!diskSession) {
@@ -53,7 +78,7 @@ async function scrapeIndexPage(limit = 50) {
   const items = parseIndexPage(res.data, limit);
 
   logger.info("🛒 Before adding items to DB: ", items);
-  await updateDb(items);
+  await LoadDb();
 
   await Promise.all(
     items.map(async (item, index) => {
@@ -71,16 +96,16 @@ async function scrapeIndexPage(limit = 50) {
         ...item,
         ...snippetData,
         metadata: {
-            session: ts,
-            status,
-        }
+          session: ts,
+          status,
+        },
       };
       logger.info("👏 Item data after scrapping snippet page", fullItemData);
       await addItem(id, fullItemData);
     })
   );
 
-  addSession(ts);
+  await addSession(ts);
   await dumpSessions();
   await dumpDb();
 }
