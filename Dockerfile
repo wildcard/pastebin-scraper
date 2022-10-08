@@ -10,6 +10,4 @@ RUN yarn
 
 COPY . .
 
-RUN mkdir data 
-
 CMD [ "yarn", "run", "runtime" ]
