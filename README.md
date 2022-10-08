@@ -30,6 +30,12 @@ Run the following commands (top to bottom)
 
 ### Docker
 
+use/pull my image
+
+`docker run kobikadosh/pastebin-scrapper`
+
+Or build your own
+
 ```sh
 docker build ./ --tag pastebin-scrapper
 docker run pastebin-scrapper
