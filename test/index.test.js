@@ -1,4 +1,4 @@
-const { scrapeIndexPage } = require("../index");
+const { scrapeIndexPage } = require("../scrape");
 
 test("Run", async () => {
     await scrapeIndexPage(3);

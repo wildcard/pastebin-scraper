@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 import meow from "meow";
-import { scrapeIndexPage } from "./index.js";
+import { scrapeIndexPage } from "./scrape.js";
 import { logger } from "./logger.js";
 
 const cli = meow(

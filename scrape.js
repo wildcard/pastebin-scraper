@@ -61,7 +61,7 @@ async function scrapeIndexPage(limit = 50) {
   let res = null;
   try {
     if (diskSession) {
-      res = { data: await readIndexPageSession(lastSessionTS) };
+      res = { data: await readIndexPageSession(ts) };
     } else {
       res = await http.get(PASTEBIN_URL);
     }
