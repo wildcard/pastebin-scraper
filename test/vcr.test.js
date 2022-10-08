@@ -1,5 +1,5 @@
 const axiosVCR = require("axios-vcr");
-const { scrapeIndexPage } = require("../scrape");
+const { scrapeIndexPage } = require("../lib/scrape");
 
 describe("VCR", () => {
   test("run", async () => {

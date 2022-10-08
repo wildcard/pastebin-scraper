@@ -4,7 +4,7 @@ const {
     parseSnippetPage,
     parseIndexPage,
     parseItem,
- } = require('../parse')
+ } = require('../lib/parse')
 const { htmlTableLiteDump, htmlSnippetPageDump } = require("./mocks");
 
 

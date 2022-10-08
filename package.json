@@ -4,13 +4,13 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "pm2 start cli.js",
+    "start": "pm2 start scrape.js",
     "test": "jest --coverage",
     "lint": "eslint .",
     "clean:db": "truncate -s 0 ./dump/db.json"
   },
   "bin": {
-    "scrape": "./cli.js"
+    "scrape": "./scrape.mjs"
   },
   "author": "",
   "license": "ISC",
