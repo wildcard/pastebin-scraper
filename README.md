@@ -14,6 +14,7 @@
 | 15:00-16:30 | Parsing snippet page                   |
 | 20:00-22:00 | refractor + loggs + working draft      |
 | 17:00-20:00 | dir reorg + cli + pm2                  |
+| 20:00-01:00 | Docker with lima                       |
 
 ## How to run?
 
@@ -21,8 +22,8 @@
 
 Run the following commands (top to bottom)
 
-1. `npm i`
-2. `npm start`
+1. `yarn`
+2. `yarn start`
 
 ### using npx
 
